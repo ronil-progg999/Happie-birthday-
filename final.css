@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Dancing+Script:wght@500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: url("media/bg2.jpg") center/cover no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+/* INTRO */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#intro.fade-out {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.intro-content {
+  text-align: center;
+}
+
+.intro-content h1,
+.intro-content p {
+  background: linear-gradient(135deg, #ff4d8d, #b4005a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* INTRO INITIAL STATE */
+.intro-content h1,
+.intro-content p,
+#startBtn {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* INTRO FADE + POP */
+#intro.show h1,
+#intro.show p,
+#intro.show #startBtn {
+  animation: introPop 0.6s ease-out forwards;
+}
+
+#intro.show p {
+  animation-delay: 0.2s;
+}
+
+#intro.show #startBtn {
+  animation-delay: 0.4s;
+}
+
+@keyframes introPop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#startBtn {
+  margin-top: 24px;
+  padding: 14px 36px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #ff4d8d, #b4005a);
+  color: white;
+  font-size: 16px;
+}
+
+/* PAGE */
+.page {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 18px 60px;
+  text-align: center;
+}
+
+/* PAPER */
+.paper {
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.paper-bg {
+  background: url("media/ppr.jpg") center/cover no-repeat;
+  padding: 5px 20px;
+  border-radius: 16px;
+}
+
+.paper-text {
+  opacity: 0;
+}
+
+.paper h2 {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* HBD */
+.hbd {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.hbd img {
+  width: 300px;
+  margin: 18px auto;
+}
+
+/* SCRAPBOOK */
+.scrapbook {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+/* POLAROIDS */
+.polaroid {
+  width: 34%;
+  background: white;
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.polaroid.left {
+  --r: -6deg;
+}
+
+.polaroid.right {
+  --r: 6deg;
+}
+
+.polaroid img {
+  width: 100%;
+  display: block;
+}
+
+/* DISC */
+.disc {
+  width: 22%;
+  margin-top: 80px;
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.disc video {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* MAIN ANIMATIONS */
+body.animate .paper {
+  animation: openPaper 1s ease-out forwards;
+}
+
+body.animate .paper-text {
+  animation: fadeIn 1s ease-out 0.4s forwards;
+}
+
+body.animate .polaroid,
+body.animate .disc,
+body.animate .hbd {
+  animation: pop 0.7s cubic-bezier(.22,1.28,.36,1) 0.8s forwards;
+}
+
+@keyframes openPaper {
+  to { transform: scaleY(1); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes pop {
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(var(--r, 0));
+  }
+}
+
+
+
+/* BUTTON HOVER + CLICK FEEDBACK */
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: scale(1.12);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+/* =========================
+   MEMORY SLIDER
+   ========================= */
+
+.memory-slider {
+  margin-top: 36px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.slider-track {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 260px;
+}
+
+.slider-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 14px;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.25);
+  transition:
+    transform 0.8s cubic-bezier(.4,0,.2,1),
+    opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
+/* positions */
+.slider-left {
+  transform: translate(-160%, -50%) scale(0.75);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.slider-center {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.slider-right {
+  transform: translate(60%, -50%) scale(0.75);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.slider-hidden-right {
+  transform: translate(180%, -50%) scale(0.6);
+  opacity: 0;
+  z-index: 1;
+}
+
+.slider-exit-left {
+  transform: translate(-260%, -50%) scale(0.6);
+  opacity: 0;
+  z-index: 1;
+}
+
+
+/* =========================
+   SLIDER SEPARATORS
+   ========================= */
+
+.slider-separator {
+  margin: 16vh 0; /* ~1/6th viewport height */
+}
+
+.slider-separator hr {
+  border: none;
+  height: 1px;
+  width: 60%;
+  margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+}
+
+/* =========================
+   DESKTOP SLIDER UPSCALE
+   ========================= */
+
+@media (min-width: 1024px) {
+
+  /* give the slider real breathing room */
+  .memory-slider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .slider-track {
+    width: 100%;
+    max-width: 1000px;   /* 🔴 THIS was the main issue */
+    height: 420px;
+    overflow: visible;   /* 🔴 allow side cards to show */
+  }
+
+  .slider-card {
+    width: 280px;        /* bigger cards */
+    height: 360px;
+  }
+
+  /* left card */
+  .slider-left {
+    transform: translate(-170%, -50%) scale(0.8);
+  }
+
+  /* center card */
+  .slider-center {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* right card */
+  .slider-right {
+    transform: translate(70%, -50%) scale(0.8);
+  }
+
+  /* preload frame */
+  .slider-hidden-right {
+    transform: translate(260%, -50%) scale(0.6);
+  }
+
+  /* exit frame */
+  .slider-exit-left {
+    transform: translate(-300%, -50%) scale(0.6);
+  }
+}
+
+/* =========================
+   FULL-WIDTH SLIDER ONLY
+   ========================= */
+
+.slider-fullwidth {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* desktop only */
+@media (min-width: 1024px) {
+  .slider-fullwidth {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+  .memory-slider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* FORCE HR VISIBILITY */
+/* =========================
+   PREMIUM SEPARATOR
+   ========================= */
+
+.slider-separator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.slider-separator hr {
+  width: min(70%, 520px);
+  height: 2px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.15),
+    0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   GALLERY TITLE
+   ========================= */
+
+.gallery-title {
+  margin-top: -6vh;  
+  margin-bottom: -1vh;
+  scale: 1.5;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow:
+    0 2px 10px rgba(255, 255, 255, 0.15),
+    0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+.photos_palaroid{
+    height: 900px;
+    width: 85%;
+}

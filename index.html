@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey, There’s a Surprise for You 🎁</h1>
+
+    <a href="surprise.html" class="gift-link" id="giftLink">
+      <img src="media/gift.jpg" alt="Gift" class="gift-img" id="giftImg">
+    </a>
+
+    <p>
+      I made something special just for you.  
+      Click the gift whenever you’re ready.
+    </p>
+  </div>
+
+  <audio id="clickSound" src="media/pop.mp3"></audio>
+
+  <script>
+    const giftLink = document.getElementById("giftLink");
+    const clickSound = document.getElementById("clickSound");
+
+    giftLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      setTimeout(() => {
+        window.location.href = giftLink.href;
+      }, 250);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HAPIE BDAY ANSHUDI</title>
+  <link rel="stylesheet" href="final.css" />
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro" class="show">
+  <div class="intro-content">
+    <h1>I knew it</h1>
+    <p>Please wait just a moment…</p>
+    <button id="startBtn">Let’s go</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- PAPER -->
+  <div class="paper-wrapper">
+    <div class="paper">
+      <div class="paper-bg">
+        <div class="paper-text">
+          <h2>Happy Birthday, My Love 💖</h2>
+          <p>
+            Happy Birthday, ANSHUDIIII ARYAAA 😺😋🐰✨👾🫠😚🫣💖 <br>
+Everyday with uu feels a little brighter, but today is Xtra special bcuz it’s all abt celebrating you....💕🥰🤌💫🐢💗🤓
+          </p>
+          <p>
+            The world really did get luckier the day you were born.😻😻<br>
+            So grateful for you, always🫶👄🫂 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HBD IMAGE -->
+  <div class="hbd">
+    <img src="media/hbd.jpg" alt="Happy Birthday">
+  </div>
+
+  <!-- SCRAPBOOK -->
+  <div class="scrapbook">
+
+    <div class="polaroid left">
+      <img src="media/photo1.jpg" />
+    </div>
+
+    <div class="disc">
+      <video id="discVideo" src="media/disc.mp4" muted loop></video>
+    </div>
+
+    <div class="polaroid right">
+      <img src="media/photo2.jpg" />
+    </div>
+
+  </div>
+
+  <!-- SLIDER OUTER WRAPPER (FULL WIDTH) -->
+<div class="slider-fullwidth">
+
+  <!-- BIG SEPARATOR -->
+  <div class="slider-separator">
+    <hr>
+  </div>
+  
+  <div class="gallery-title">
+  Photo Gallery
+</div>
+
+  <!-- SLIDER -->
+  <div class="memory-slider">
+    <div class="slider-track">
+      <div class="slider-card"></div>
+      <div class="slider-card"></div>
+      <div class="slider-card"></div>
+      <div class="slider-card"></div>
+    </div>
+  </div>
+
+  <!-- BIG SEPARATOR -->
+  <div class="slider-separator">
+    <hr>
+  </div>
+
+</div>  
+
+<img src="media/photos.jpg" class="photos_palaroid">
+
+
+</div>
+
+
+<audio id="music" src="media/zulfein.mp3" loop></audio>
+
+<script>
+const intro = document.getElementById("intro");
+const startBtn = document.getElementById("startBtn");
+const music = document.getElementById("music");
+const disc = document.getElementById("discVideo");
+
+startBtn.addEventListener("click", () => {
+  intro.classList.add("fade-out");
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    document.body.classList.add("animate");
+    music.play();
+    disc.play();
+  }, 350);
+});
+
+disc.addEventListener("click", () => {
+  if (music.paused) {
+    music.play();
+    disc.play();
+  } else {
+    music.pause();
+    disc.pause();
+  }
+});
+</script>
+<script>
+/* =========================
+   MEMORY SLIDER SCRIPT
+   ========================= */
+
+const sliderImages = [
+  "media/photo1.jpg",
+  "media/photo2.jpg",
+  "media/photo3.jpg",
+  "media/photo4.jpg",
+  "media/photo5.jpg",
+  "media/photo6.jpg",
+  "media/photo7.jpg"
+];
+
+const sliderTrack = document.querySelector(".slider-track");
+let sliderCards = Array.from(document.querySelectorAll(".slider-card"));
+let sliderIndex = 0;
+
+function sliderApplyImages() {
+  sliderCards.forEach((card, i) => {
+    card.style.backgroundImage =
+      `url(${sliderImages[(sliderIndex + i) % sliderImages.length]})`;
+  });
+}
+
+function sliderSetPositions() {
+  sliderCards[0].className = "slider-card slider-left";
+  sliderCards[1].className = "slider-card slider-center";
+  sliderCards[2].className = "slider-card slider-right";
+  sliderCards[3].className = "slider-card slider-hidden-right";
+}
+
+function sliderNext() {
+  sliderCards[0].className = "slider-card slider-exit-left";
+  sliderCards[1].className = "slider-card slider-left";
+  sliderCards[2].className = "slider-card slider-center";
+  sliderCards[3].className = "slider-card slider-right";
+
+  setTimeout(() => {
+    sliderTrack.appendChild(sliderCards[0]);
+    sliderCards = Array.from(sliderTrack.children);
+
+    sliderIndex = (sliderIndex + 1) % sliderImages.length;
+    sliderApplyImages();
+    sliderSetPositions();
+  }, 800);
+}
+
+/* init */
+sliderApplyImages();
+sliderSetPositions();
+setInterval(sliderNext, 2200);
+</script>
+
+</body>
+</html>

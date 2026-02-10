@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --pink-main: #ff4d8d;
+    --pink-soft: #ff85b3;
+    --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #6a1b9a 0%,
+        #7b1fa2 35%,
+        #8e24aa 65%,
+        #9c27b0 100%
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    width: 70%;
+    max-width: 380px;
+    padding: 2.2rem 1.6rem;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    animation: popIn 0.7s cubic-bezier(.22,1.1,.36,1);
+}
+
+/* ===== TEXT ===== */
+.card h1 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* ===== GIFT ===== */
+.gift-link {
+    display: inline-block;
+}
+
+.gift-img {
+    width: 70%;
+    max-width: 200px;
+    margin: 1rem 0;
+    cursor: pointer;
+    animation: pulse 1.8s ease-in-out infinite;
+    transition: transform 0.25s ease;
+}
+
+.gift-img:active {
+    transform: scale(0.92);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+    .card {
+        width: 420px;
+        padding: 2.6rem 2rem;
+    }
+}
+
+
+/* GIFT HOVER + CLICK FEEDBACK (SHAPE-AWARE SHADOW) */
+.gift-img {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.gift-img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
+}
+
+.gift-img:active {
+  transform: scale(1.12);
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.45));
+}
