@@ -51,7 +51,7 @@ Everyday with uu feels a little brighter, but today is Xtra special bcuz it’s 
     </div>
 
     <div class="disc">
-      <video id="discVideo" src="media/disc.mp4" muted loop></video>
+      <video id="discVideo" src="media/disc.mp4" muted loop playsinline></video>
     </div>
 
     <div class="polaroid right">
@@ -95,7 +95,7 @@ Everyday with uu feels a little brighter, but today is Xtra special bcuz it’s 
 </div>
 
 
-<audio id="music" src="media/zulfein.mp3" loop></audio>
+<audio id="music" src="media/meow.mp3" loop preload="auto"></audio>
 
 <script>
 const intro = document.getElementById("intro");
@@ -104,13 +104,16 @@ const music = document.getElementById("music");
 const disc = document.getElementById("discVideo");
 
 startBtn.addEventListener("click", () => {
+  // 🔑 START AUDIO IMMEDIATELY (required by browser)
+  music.play().catch(() => {});
+  disc.play().catch(() => {});
+
+  // visuals can wait
   intro.classList.add("fade-out");
 
   setTimeout(() => {
     intro.style.display = "none";
     document.body.classList.add("animate");
-    music.play();
-    disc.play();
   }, 350);
 });
 
@@ -124,6 +127,7 @@ disc.addEventListener("click", () => {
   }
 });
 </script>
+  
 <script>
 /* =========================
    MEMORY SLIDER SCRIPT
