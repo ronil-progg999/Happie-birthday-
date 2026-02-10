@@ -104,11 +104,13 @@ const music = document.getElementById("music");
 const disc = document.getElementById("discVideo");
 
 startBtn.addEventListener("click", () => {
-  // 🔑 START AUDIO IMMEDIATELY (required by browser)
-  music.play().catch(() => {});
+  // 1) Attempt to play right here — Chrome will allow it
+  music.play().catch(err => {
+    console.log("Audio play failed:", err);
+  });
   disc.play().catch(() => {});
 
-  // visuals can wait
+  // Then proceed with your visuals
   intro.classList.add("fade-out");
 
   setTimeout(() => {
